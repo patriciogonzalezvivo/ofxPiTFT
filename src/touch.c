@@ -22,6 +22,12 @@
     MA 02111-1307, USA
 */
 
+#ifdef TARGET_RASPBERRY_PI
+#include <linux/input.h>
+#include <string.h>
+#include <fcntl.h>
+#include <stdio.h>
+#endif
 
 #define KWHT  "\x1B[37m"
 #define KYEL  "\x1B[33m"
