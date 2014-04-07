@@ -8,11 +8,10 @@
 
 #include "ofxPiTFT.h"
 
-void ofxPiTFT::setup(ofBaseApp *_app){
-}
 
-
-int ofxPiTFT::displayInit(){
+ofxPiTFT::ofxPiTFT(){
+    //  Init the display
+    //
 #ifdef TARGET_RASPBERRY_PI
     fbfd = 0;
     fbp = 0;
@@ -71,10 +70,10 @@ int ofxPiTFT::displayInit(){
     vc_dispmanx_rect_set(&rect1, 0, 0, vinfo.xres, vinfo.yres);
 #endif
     
-    return 1;
+    ofAddListener(ofEvents().draw,this,&ofxPiTFT::draw);
 }
 
-void ofxPiTFT::displayDispose(){
+ofxPiTFT::~ofxPiTFT(){
 #ifdef TARGET_RASPBERRY_PI
     munmap(fbp, finfo.smem_len);
     close(fbfd);
@@ -83,7 +82,12 @@ void ofxPiTFT::displayDispose(){
 #endif
 }
 
-void ofxPiTFT::displayCopy(){
+void ofxPiTFT::setupTouchEvents(ofBaseApp *_app){
+    
+
+}
+
+void ofxPiTFT::draw(ofEventArgs & args){
 #ifdef TARGET_RASPBERRY_PI
     vc_dispmanx_snapshot(display, screen_resource, (DISPMANX_TRANSFORM_T)0);
     vc_dispmanx_resource_read_data(screen_resource, &rect1, fbp, vinfo.xres * vinfo.bits_per_pixel / 8);

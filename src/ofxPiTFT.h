@@ -20,8 +20,12 @@
 
 class ofxPiTFT{
 public:
+    ofxPiTFT();
+    ~ofxPiTFT();
     
-    void setup(ofBaseApp *_app);
+    void setupTouchEvents(ofBaseApp *_app);
+    
+    void draw(ofEventArgs & args);
     
     int  displayInit();
     void displayDispose();

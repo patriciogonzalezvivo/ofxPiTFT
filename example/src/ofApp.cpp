@@ -4,8 +4,6 @@
 void ofApp::setup(){
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
-
-    piTft.setup(this);
 }
 
 //--------------------------------------------------------------
@@ -15,7 +13,15 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofBackground(0);
     
+    ofNoFill();
+    
+    ofSetColor(255, 0, 0);
+    ofCircle(mouseX, mouseY, 5);
+    
+    ofSetColor(0,255,0);
+    ofRect(0,0,320,240);
 }
 
 //--------------------------------------------------------------
