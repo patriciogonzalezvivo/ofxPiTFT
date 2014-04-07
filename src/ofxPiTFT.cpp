@@ -85,24 +85,24 @@ ofxPiTFT::~ofxPiTFT(){
 }
 
 void ofxPiTFT::setupTouchEvents(ofBaseApp *_app){
-    app = _app;
-
-    //  Touch
-    //
-    if (openTouchScreen() == 1)
-		perror("error opening touch screen");
-    
-    getTouchScreenDetails(&screenXmin,&screenXmax,&screenYmin,&screenYmax);
-    scaleXvalue = ((float)screenXmax-screenXmin) / 320.0;
-    scaleYvalue = ((float)screenYmax-screenYmin) / 240.0;
-    
-    ofAddListener(ofEvents().update,this,&ofxPiTFT::update);
+//    app = _app;
+//
+//    //  Touch
+//    //
+//    if (openTouchScreen() == 1)
+//		perror("error opening touch screen");
+//    
+//    getTouchScreenDetails(&screenXmin,&screenXmax,&screenYmin,&screenYmax);
+//    scaleXvalue = ((float)screenXmax-screenXmin) / 320.0;
+//    scaleYvalue = ((float)screenYmax-screenYmin) / 240.0;
+//    
+//    ofAddListener(ofEvents().update,this,&ofxPiTFT::update);
 }
 
 void ofxPiTFT::update(ofEventArgs & args){
-    getTouchSample(&rawX, &rawY, &rawPressure);
-    app->mouseX = (rawX/scaleXvalue)*ofGetWidth();
-    app->mouseY = (rawY/scaleYvalue)*ofGetHeight();
+//    getTouchSample(&rawX, &rawY, &rawPressure);
+//    app->mouseX = (rawX/scaleXvalue)*ofGetWidth();
+//    app->mouseY = (rawY/scaleYvalue)*ofGetHeight();
 }
 
 void ofxPiTFT::draw(ofEventArgs & args){
