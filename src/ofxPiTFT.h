@@ -27,10 +27,6 @@ public:
     
     void draw(ofEventArgs & args);
     
-    int  displayInit();
-    void displayDispose();
-    void displayCopy();
-    
 private:
     
 #ifdef TARGET_RASPBERRY_PI
