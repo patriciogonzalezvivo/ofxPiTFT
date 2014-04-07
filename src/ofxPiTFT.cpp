@@ -95,16 +95,16 @@ void ofxPiTFT::setupTouchEvents(ofBaseApp *_app){
     }
     
     getTouchScreenDetails(&screenXmin,&screenXmax,&screenYmin,&screenYmax);
-    scaleXvalue = ((float)screenXmax-screenXmin) / ofGetScreenWidth();
-    scaleYvalue = ((float)screenYmax-screenYmin) / ofGetScreenHeight();
+    scaleXvalue = ((float)screenXmax-screenXmin) / 320.0;
+    scaleYvalue = ((float)screenYmax-screenYmin) / 240.0;
     
     ofAddListener(ofEvents().update,this,&ofxPiTFT::update);
 }
 
 void ofxPiTFT::update(ofEventArgs & args){
     getTouchSample(&rawX, &rawY, &rawPressure);
-    app->mouseX = rawX*scaleXvalue;
-    app->mouseY = rawY*scaleYvalue;
+    app->mouseX = (rawX/scaleXvalue)*ofGetWidth();
+    app->mouseY = (rawY/scaleYvalue)*ofGetHeight();
 }
 
 void ofxPiTFT::draw(ofEventArgs & args){

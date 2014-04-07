@@ -23,6 +23,12 @@
 */
 
 #ifdef TARGET_RASPBERRY_PI
+
+#include <linux/input.h>
+#include <string.h>
+#include <fcntl.h>
+#include <stdio.h>
+
 #define BITS_PER_LONG (sizeof(long) * 8)
 #define NBITS(x) ((((x)-1)/BITS_PER_LONG)+1)
 #define OFF(x)  ((x)%BITS_PER_LONG)
@@ -342,6 +348,7 @@ char **names[EV_MAX + 1] = {
 	[EV_MSC] = misc,			[EV_LED] = leds,
 	[EV_SND] = sounds,			[EV_REP] = repeats,
 };
+
 #endif
 
 
