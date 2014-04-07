@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D09A11E18F2F93D00183CC4 /* ofxPiTFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D09A11D18F2F93D00183CC4 /* ofxPiTFT.cpp */; };
+		3D09A12318F30CE500183CC4 /* touch.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D09A12118F30CE500183CC4 /* touch.c */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -62,6 +63,8 @@
 /* Begin PBXFileReference section */
 		11e681416f6564ea5ed5ad819a2bead6 /* ofxPiTFT.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPiTFT.h; path = ../../../addons/ofxPiTFT/src/ofxPiTFT.h; sourceTree = SOURCE_ROOT; };
 		3D09A11D18F2F93D00183CC4 /* ofxPiTFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxPiTFT.cpp; path = ../src/ofxPiTFT.cpp; sourceTree = "<group>"; };
+		3D09A12118F30CE500183CC4 /* touch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = touch.c; path = ../src/touch.c; sourceTree = "<group>"; };
+		3D09A12218F30CE500183CC4 /* touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = touch.h; path = ../src/touch.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -117,6 +120,8 @@
 		47c6bf52ecb9576271bc96652d352002 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				3D09A12118F30CE500183CC4 /* touch.c */,
+				3D09A12218F30CE500183CC4 /* touch.h */,
 				11e681416f6564ea5ed5ad819a2bead6 /* ofxPiTFT.h */,
 				3D09A11D18F2F93D00183CC4 /* ofxPiTFT.cpp */,
 			);
@@ -307,6 +312,7 @@
 				3D09A11E18F2F93D00183CC4 /* ofxPiTFT.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				3D09A12318F30CE500183CC4 /* touch.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
