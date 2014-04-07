@@ -22,6 +22,17 @@
 #include <sys/ioctl.h>
 #include <bcm_host.h>
 #include <signal.h>
+
+char *events[EV_MAX + 1] = {
+	[0 ... EV_MAX] = NULL,
+	[EV_SYN] = "Sync",			[EV_KEY] = "Key",
+	[EV_REL] = "Relative",			[EV_ABS] = "Absolute",
+	[EV_MSC] = "Misc",			[EV_LED] = "LED",
+	[EV_SND] = "Sound",			[EV_REP] = "Repeat",
+	[EV_FF] = "ForceFeedback",		[EV_PWR] = "Power",
+	[EV_FF_STATUS] = "ForceFeedbackStatus",
+};
+
 #endif
 
 class ofxPiTFT{
