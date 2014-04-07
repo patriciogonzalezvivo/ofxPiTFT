@@ -4,7 +4,10 @@
 //  Thanks to Matt Bell
 //  http://forum.openframeworks.cc/t/pitft-adafruit-tft-touchscreen/15107/5
 //
+//  https://github.com/notro/fbtft
 //
+//  And Mark Williams
+//  https://github.com/mwilliams03/Pi-Touchscreen-basic
 
 #include "ofMain.h"
 
@@ -13,9 +16,13 @@
 #include <syslog.h>
 #include <fcntl.h>
 #include <linux/fb.h>
+#include <linux/input.h>
+#include <string.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
 #include <bcm_host.h>
+
+#include "linux_events.h"
 #endif
 
 class ofxPiTFT{
@@ -25,9 +32,21 @@ public:
     
     void setupTouchEvents(ofBaseApp *_app);
     
+    void update(ofEventArgs & args);
     void draw(ofEventArgs & args);
+    void exit(ofEventArgs & args);
     
 private:
+    
+    ofBaseApp *app;
+    
+    void getTouchScreenDetails(int *screenXmin,int *screenXmax,int *screenYmin,int *screenYmax);
+    void getTouchSample(int *rawX, int *rawY, int *rawPressure);
+    int fd;
+    int screenXmax, screenXmin;
+	int screenYmax, screenYmin;
+    int rawX, rawY, rawPressure;
+	float scaleXvalue, scaleYvalue;
     
 #ifdef TARGET_RASPBERRY_PI
     //DISPMANX_DISPLAY_HANDLE_T display;

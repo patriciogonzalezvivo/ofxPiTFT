@@ -4,6 +4,8 @@
 void ofApp::setup(){
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
+    
+    piTft.setupTouchEvents(this);
 }
 
 //--------------------------------------------------------------
