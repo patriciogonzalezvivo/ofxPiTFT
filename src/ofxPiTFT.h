@@ -9,8 +9,6 @@
 //  And Mark Williams
 //  https://github.com/mwilliams03/Pi-Touchscreen-basic
 
-
-
 #ifdef TARGET_RASPBERRY_PI
 #include <linux/input.h>
 #include <string.h>
@@ -19,7 +17,6 @@
 #endif
 
 #include "touch.h"
-#include "touch.c"
 
 #include "ofMain.h"
 
