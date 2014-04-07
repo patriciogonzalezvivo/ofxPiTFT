@@ -21,8 +21,6 @@
 #include <sys/mman.h>
 #include <sys/ioctl.h>
 #include <bcm_host.h>
-
-#include "linux_events.h"
 #endif
 
 class ofxPiTFT{
