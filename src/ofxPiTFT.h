@@ -23,7 +23,7 @@
 #include <bcm_host.h>
 #include <signal.h>
 
-char string[EV_MAX + 1] = {
+string events[EV_MAX + 1] = {
 	[0 ... EV_MAX] = NULL,
 	[EV_SYN] = "Sync",
     [EV_KEY] = "Key",
