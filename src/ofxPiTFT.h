@@ -58,6 +58,7 @@ private:
     
 #ifdef TARGET_RASPBERRY_PI
     int primaryDisplay;
+    DISPMANX_MODEINFO_T primaryDisplayInfo;
     
     int secondaryDisplayBuffer;
     VC_RECT_T secondaryDisplayRect;

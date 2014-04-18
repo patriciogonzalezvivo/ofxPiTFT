@@ -29,7 +29,6 @@ ofxPiTFT::ofxPiTFT(){
         ofLog(OF_LOG_ERROR, "Unable to open primary display");
         return;
     }
-    DISPMANX_MODEINFO_T primaryDisplayInfo;
     ret = vc_dispmanx_display_get_info(primaryDisplay, &primaryDisplayInfo);
     if (ret) {
          ofLog(OF_LOG_ERROR, "Unable to get primary display information");
@@ -57,6 +56,7 @@ ofxPiTFT::ofxPiTFT(){
     
     //  SCREEN RESOURCE
     //
+//    screenResource = vc_dispmanx_resource_create(VC_IMAGE_RGB565, secondaryVInfo.xres, secondaryVInfo.yres, &image_prt);
     screenResource = vc_dispmanx_resource_create(VC_IMAGE_RGB565, secondaryVInfo.xres, secondaryVInfo.yres, &image_prt);
     if (!screenResource) {
          ofLog(OF_LOG_ERROR, "Unable to create screen buffer");
@@ -74,7 +74,8 @@ ofxPiTFT::ofxPiTFT(){
         return;
     }
     
-    vc_dispmanx_rect_set(&secondaryDisplayRect, 0, 0, secondaryVInfo.xres, secondaryVInfo.yres);
+//    vc_dispmanx_rect_set(&secondaryDisplayRect, 0, 0, secondaryVInfo.xres, secondaryVInfo.yres);
+    vc_dispmanx_rect_set(&secondaryDisplayRect, 0, 0, primaryDisplayInfo.width, primaryDisplayInfo.height);
 #endif
     
     ofAddListener(ofEvents().draw,this,&ofxPiTFT::draw);
