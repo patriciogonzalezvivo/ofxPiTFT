@@ -26,7 +26,6 @@
 //
 //extern "C" {
 //    #include "touch.h"
-//    #include "touch.c"
 //}
 
 #endif
