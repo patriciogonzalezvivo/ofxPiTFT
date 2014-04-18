@@ -17,7 +17,7 @@ ofxPiTFT::ofxPiTFT(){
     //  Init the display
     //
 #ifdef TARGET_RASPBERRY_PI
-    secondatyDisplayBuffer = 0;
+    secondaryDisplayBuffer = 0;
     fbp = 0;
     
     bcm_host_init();
@@ -33,43 +33,43 @@ ofxPiTFT::ofxPiTFT(){
         
         return;
     }
-    ofLog(OF_LOG_VERBOSE, "Primary display is " + ofToString(primaryDisplayInfo.width) + " x " + ofToString(primaryDisplayInfo.height) );
+    ofLog(OF_LOG_NOTICE, "Primary display is " + ofToString(primaryDisplayInfo.width) + " x " + ofToString(primaryDisplayInfo.height) );
     
     
-    secondatyDisplayBuffer = open("/dev/fb1", O_RDWR);
-    if (!secondatyDisplayBuffer) {
+    secondaryDisplayBuffer = open("/dev/fb1", O_RDWR);
+    if (!secondaryDisplayBuffer) {
          ofLog(OF_LOG_ERROR, "Unable to open secondary display");
         return;
     }
-    if (ioctl(secondatyDisplayBuffer, FBIOGET_FSCREENINFO, &finfo)) {
+    if (ioctl(secondaryDisplayBuffer, FBIOGET_FSCREENINFO, &secondaryFInfo)) {
          ofLog(OF_LOG_ERROR, "Unable to get secondary display information");
         return;
     }
-    if (ioctl(secondatyDisplayBuffer, FBIOGET_VSCREENINFO, &vinfo)) {
+    if (ioctl(secondaryDisplayBuffer, FBIOGET_VSCREENINFO, &secondaryVInfo)) {
          ofLog(OF_LOG_ERROR, "Unable to get secondary display information");
         return;
     }
     
-    ofLog(OF_LOG_VERBOSE, "Second display is " + ofToString(vinfo.xres) + " x " + ofToString(vinfo.yres) + " " + ofToString(vinfo.bits_per_pixel) );
+    ofLog(OF_LOG_NOTICE, "Second display is " + ofToString(secondaryVInfo.xres) + " x " + ofToString(secondaryVInfo.yres) + " " + ofToString(secondaryVInfo.bits_per_pixel) );
     
-    screen_resource = vc_dispmanx_resource_create(VC_IMAGE_RGB565, vinfo.xres, vinfo.yres, &image_prt);
+    screen_resource = vc_dispmanx_resource_create(VC_IMAGE_RGB565, secondaryVInfo.xres, secondaryVInfo.yres, &image_prt);
     if (!screen_resource) {
          ofLog(OF_LOG_ERROR, "Unable to create screen buffer");
-        close(secondatyDisplayBuffer);
+        close(secondaryDisplayBuffer);
         vc_dispmanx_display_close(primaryDisplay);
         return;
     }
     
-    fbp = (char*) mmap(0, finfo.smem_len, PROT_READ | PROT_WRITE, MAP_SHARED, secondatyDisplayBuffer, 0);
+    fbp = (char*) mmap(0, secondaryFInfo.smem_len, PROT_READ | PROT_WRITE, MAP_SHARED, secondaryDisplayBuffer, 0);
     if (fbp <= 0) {
         ofLog(OF_LOG_ERROR, "Unable to create mamory mapping");
-        close(secondatyDisplayBuffer);
+        close(secondaryDisplayBuffer);
         ret = vc_dispmanx_resource_delete(screen_resource);
         vc_dispmanx_display_close(primaryDisplay);
         return;
     }
     
-    vc_dispmanx_rect_set(&rect1, 0, 0, vinfo.xres, vinfo.yres);
+    vc_dispmanx_rect_set(&rect1, 0, 0, secondaryVInfo.xres, secondaryVInfo.yres);
 #endif
     
     ofAddListener(ofEvents().draw,this,&ofxPiTFT::draw);
@@ -106,14 +106,14 @@ void ofxPiTFT::update(ofEventArgs & args){
 void ofxPiTFT::draw(ofEventArgs & args){
 #ifdef TARGET_RASPBERRY_PI
     vc_dispmanx_snapshot(primaryDisplay, screen_resource, (DISPMANX_TRANSFORM_T)0);
-    vc_dispmanx_resource_read_data(screen_resource, &rect1, fbp, vinfo.xres * vinfo.bits_per_pixel / 8);
+    vc_dispmanx_resource_read_data(screen_resource, &rect1, fbp, secondaryVInfo.xres * secondaryVInfo.bits_per_pixel / 8);
 #endif
 }
 
 void ofxPiTFT::exit(ofEventArgs & args){
 #ifdef TARGET_RASPBERRY_PI
-    munmap(fbp, finfo.smem_len);
-    close(secondatyDisplayBuffer);
+    munmap(fbp, secondaryFInfo.smem_len);
+    close(secondaryDisplayBuffer);
     ret = vc_dispmanx_resource_delete(screen_resource);
     vc_dispmanx_display_close(primaryDisplay);
 #endif

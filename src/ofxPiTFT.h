@@ -56,10 +56,11 @@ private:
     VC_RECT_T rect1;
     
     int ret;
-    int secondatyDisplayBuffer;
+    int secondaryDisplayBuffer;
+    struct fb_var_screeninfo secondaryVInfo;
+    struct fb_fix_screeninfo secondaryFInfo;
     char *fbp;
     
-    struct fb_var_screeninfo vinfo;
-    struct fb_fix_screeninfo finfo;
+    
 #endif
 };
