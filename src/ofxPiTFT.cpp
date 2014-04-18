@@ -42,7 +42,7 @@ ofxPiTFT::ofxPiTFT(){
         return;
     }
     if (ioctl(secondatyDisplayBuffer, FBIOGET_FSCREENINFO, &finfo)) {
-         ofLog(OF_LOG_ERROR,, "Unable to get secondary display information");
+         ofLog(OF_LOG_ERROR, "Unable to get secondary display information");
         return;
     }
     if (ioctl(secondatyDisplayBuffer, FBIOGET_VSCREENINFO, &vinfo)) {
@@ -62,7 +62,7 @@ ofxPiTFT::ofxPiTFT(){
     
     fbp = (char*) mmap(0, finfo.smem_len, PROT_READ | PROT_WRITE, MAP_SHARED, secondatyDisplayBuffer, 0);
     if (fbp <= 0) {
-         ofLog(OF_LOG_ERROR, "Unable to create mamory mapping");
+        ofLog(OF_LOG_ERROR, "Unable to create mamory mapping");
         close(secondatyDisplayBuffer);
         ret = vc_dispmanx_resource_delete(screen_resource);
         vc_dispmanx_display_close(primaryDisplay);
