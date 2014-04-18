@@ -21,13 +21,13 @@
 #include <sys/ioctl.h>
 #include <bcm_host.h>
 
-#include <linux/input.h>
-#include <string.h>
-
-extern "C" {
-    #include "touch.h"
-    #include "touch.c"
-}
+//#include <linux/input.h>
+//#include <string.h>
+//
+//extern "C" {
+//    #include "touch.h"
+//    #include "touch.c"
+//}
 
 #endif
 
@@ -58,8 +58,8 @@ private:
     
     ofBaseApp *app;
     
-    int rawX, rawY, rawPressure;
-	float scaleXvalue, scaleYvalue;
+//    int rawX, rawY, rawPressure;
+//	float scaleXvalue, scaleYvalue;
     
 #ifdef TARGET_RASPBERRY_PI
     int primaryDisplay;
