@@ -104,7 +104,7 @@ void ofxPiTFT::setupTouchEvents(ofBaseApp *_app){
 
 void ofxPiTFT::setScreenTransformation(SCREEN_TRANSFORMATION _trans){
     #ifdef TARGET_RASPBERRY_PI
-    screenTransformation = (VC_IMAGE_TRANSFORM_T)_trans;
+    screenTransformation = (DISPMANX_TRANSFORM_T)_trans;
     #endif
 }
 
