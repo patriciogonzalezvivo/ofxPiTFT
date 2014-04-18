@@ -3,11 +3,12 @@
 //
 //  Thanks to Matt Bell
 //  http://forum.openframeworks.cc/t/pitft-adafruit-tft-touchscreen/15107/5
-//
 //  https://github.com/notro/fbtft
 //
-//  And Mark Williams
-//  https://github.com/mwilliams03/Pi-Touchscreen-basic
+//
+//  TODO:
+//      - add touch events from this code by Mark Williams
+//       https://github.com/mwilliams03/Pi-Touchscreen-basic
 
 #include "ofMain.h"
 
