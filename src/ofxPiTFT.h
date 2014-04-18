@@ -39,15 +39,15 @@ private:
     
     ofBaseApp *app;
     
-    int screenXmax, screenXmin;
-	int screenYmax, screenYmin;
-    int rawX, rawY, rawPressure;
-	float scaleXvalue, scaleYvalue;
+//    int screenXmax, screenXmin;
+//	int screenYmax, screenYmin;
+//    int rawX, rawY, rawPressure;
+//	float scaleXvalue, scaleYvalue;
     
 #ifdef TARGET_RASPBERRY_PI
     //DISPMANX_DISPLAY_HANDLE_T display;
-    int display;
-    DISPMANX_MODEINFO_T display_info;
+    int primaryDisplay;
+    DISPMANX_MODEINFO_T primaryDisplayInfo;
     
     //DISPMANX_RESOURCE_HANDLE_T screen_resource;
     int screen_resource;
@@ -56,7 +56,7 @@ private:
     VC_RECT_T rect1;
     
     int ret;
-    int fbfd;
+    int secondatyDisplayBuffer;
     char *fbp;
     
     struct fb_var_screeninfo vinfo;

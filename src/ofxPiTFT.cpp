@@ -17,7 +17,7 @@ ofxPiTFT::ofxPiTFT(){
     //  Init the display
     //
 #ifdef TARGET_RASPBERRY_PI
-    fbfd = 0;
+    secondatyDisplayBuffer = 0;
     fbp = 0;
     
     setlogmask(LOG_UPTO(LOG_DEBUG));
@@ -25,49 +25,50 @@ ofxPiTFT::ofxPiTFT(){
     
     bcm_host_init();
     
-    display = vc_dispmanx_display_open(0);
-    if (!display) {
-        syslog(LOG_ERR, "Unable to open primary display");
+    primaryDisplay = vc_dispmanx_display_open(0);
+    if (!primaryDisplay) {
+        ofLog(OF_LOG_ERROR, "Unable to open primary display");
         return;
     }
-    ret = vc_dispmanx_display_get_info(display, &display_info);
+    ret = vc_dispmanx_display_get_info(primaryDisplay, &primaryDisplayInfo);
     if (ret) {
-        syslog(LOG_ERR, "Unable to get primary display information");
+         ofLog(OF_LOG_ERROR, "Unable to get primary display information");
+        
         return;
     }
-    syslog(LOG_INFO, "Primary display is %d x %d", display_info.width, display_info.height);
+    ofLog(OF_LOG_VERBOSE, "Primary display is " + ofToString(primaryDisplayInfo.width) + " x " + ofToString(primaryDisplayInfo.height) );
     
     
-    fbfd = open("/dev/fb1", O_RDWR);
-    if (!fbfd) {
-        syslog(LOG_ERR, "Unable to open secondary display");
+    secondatyDisplayBuffer = open("/dev/fb1", O_RDWR);
+    if (!secondatyDisplayBuffer) {
+         ofLog(OF_LOG_ERROR, "Unable to open secondary display");
         return;
     }
-    if (ioctl(fbfd, FBIOGET_FSCREENINFO, &finfo)) {
-        syslog(LOG_ERR, "Unable to get secondary display information");
+    if (ioctl(secondatyDisplayBuffer, FBIOGET_FSCREENINFO, &finfo)) {
+         ofLog(OF_LOG_ERROR,, "Unable to get secondary display information");
         return;
     }
-    if (ioctl(fbfd, FBIOGET_VSCREENINFO, &vinfo)) {
-        syslog(LOG_ERR, "Unable to get secondary display information");
+    if (ioctl(secondatyDisplayBuffer, FBIOGET_VSCREENINFO, &vinfo)) {
+         ofLog(OF_LOG_ERROR, "Unable to get secondary display information");
         return;
     }
     
-    syslog(LOG_INFO, "Second display is %d x %d %dbps\n", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
+    ofLog(OF_LOG_VERBOSE, "Second display is " + ofToString(vinfo.xres) + " x " + ofToString(vinfo.yres) + " " + ofToString(vinfo.bits_per_pixel) );
     
     screen_resource = vc_dispmanx_resource_create(VC_IMAGE_RGB565, vinfo.xres, vinfo.yres, &image_prt);
     if (!screen_resource) {
-        syslog(LOG_ERR, "Unable to create screen buffer");
-        close(fbfd);
-        vc_dispmanx_display_close(display);
+         ofLog(OF_LOG_ERROR, "Unable to create screen buffer");
+        close(secondatyDisplayBuffer);
+        vc_dispmanx_display_close(primaryDisplay);
         return;
     }
     
-    fbp = (char*) mmap(0, finfo.smem_len, PROT_READ | PROT_WRITE, MAP_SHARED, fbfd, 0);
+    fbp = (char*) mmap(0, finfo.smem_len, PROT_READ | PROT_WRITE, MAP_SHARED, secondatyDisplayBuffer, 0);
     if (fbp <= 0) {
-        syslog(LOG_ERR, "Unable to create mamory mapping");
-        close(fbfd);
+         ofLog(OF_LOG_ERROR, "Unable to create mamory mapping");
+        close(secondatyDisplayBuffer);
         ret = vc_dispmanx_resource_delete(screen_resource);
-        vc_dispmanx_display_close(display);
+        vc_dispmanx_display_close(primaryDisplay);
         return;
     }
     
@@ -107,7 +108,7 @@ void ofxPiTFT::update(ofEventArgs & args){
 
 void ofxPiTFT::draw(ofEventArgs & args){
 #ifdef TARGET_RASPBERRY_PI
-    vc_dispmanx_snapshot(display, screen_resource, (DISPMANX_TRANSFORM_T)0);
+    vc_dispmanx_snapshot(primaryDisplay, screen_resource, (DISPMANX_TRANSFORM_T)0);
     vc_dispmanx_resource_read_data(screen_resource, &rect1, fbp, vinfo.xres * vinfo.bits_per_pixel / 8);
 #endif
 }
@@ -115,8 +116,8 @@ void ofxPiTFT::draw(ofEventArgs & args){
 void ofxPiTFT::exit(ofEventArgs & args){
 #ifdef TARGET_RASPBERRY_PI
     munmap(fbp, finfo.smem_len);
-    close(fbfd);
+    close(secondatyDisplayBuffer);
     ret = vc_dispmanx_resource_delete(screen_resource);
-    vc_dispmanx_display_close(display);
+    vc_dispmanx_display_close(primaryDisplay);
 #endif
 }
