@@ -66,7 +66,7 @@ private:
     
     int screenResource;
     
-    VC_IMAGE_TRANSFORM_T screenTransformation;
+    DISPMANX_TRANSFORM_T screenTransformation;
     uint32_t image_prt;
     
     int ret;
