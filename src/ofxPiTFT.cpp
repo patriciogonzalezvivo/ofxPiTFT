@@ -20,9 +20,6 @@ ofxPiTFT::ofxPiTFT(){
     secondatyDisplayBuffer = 0;
     fbp = 0;
     
-    setlogmask(LOG_UPTO(LOG_DEBUG));
-    openlog("fbcp", LOG_NDELAY | LOG_PID, LOG_USER);
-    
     bcm_host_init();
     
     primaryDisplay = vc_dispmanx_display_open(0);
