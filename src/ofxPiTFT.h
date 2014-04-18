@@ -15,12 +15,19 @@
 #ifdef TARGET_RASPBERRY_PI
 
 #include <stdio.h>
-#include <syslog.h>
 #include <fcntl.h>
 #include <linux/fb.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
 #include <bcm_host.h>
+
+#include <linux/input.h>
+#include <string.h>
+
+extern "C" {
+    #include "touch.h"
+    #include "touch.c"
+}
 
 #endif
 
@@ -51,10 +58,8 @@ private:
     
     ofBaseApp *app;
     
-//    int screenXmax, screenXmin;
-//	int screenYmax, screenYmin;
-//    int rawX, rawY, rawPressure;
-//	float scaleXvalue, scaleYvalue;
+    int rawX, rawY, rawPressure;
+	float scaleXvalue, scaleYvalue;
     
 #ifdef TARGET_RASPBERRY_PI
     int primaryDisplay;

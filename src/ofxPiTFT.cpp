@@ -91,18 +91,23 @@ ofxPiTFT::~ofxPiTFT(){
 }
 
 void ofxPiTFT::setupTouchEvents(ofBaseApp *_app){
-//    app = _app;
-//
-//    //  Touch
-//    //
-//    if (openTouchScreen() == 1)
-//		perror("error opening touch screen");
-//    
-//    getTouchScreenDetails(&screenXmin,&screenXmax,&screenYmin,&screenYmax);
-//    scaleXvalue = ((float)screenXmax-screenXmin) / 320.0;
-//    scaleYvalue = ((float)screenYmax-screenYmin) / 240.0;
-//    
-//    ofAddListener(ofEvents().update,this,&ofxPiTFT::update);
+    app = _app;
+
+    #ifdef TARGET_RASPBERRY_PI
+    //  Touch
+    //
+    if (openTouchScreen() == 1)
+		perror("error opening touch screen");
+    
+    int screenXmax, screenXmin;
+	int screenYmax, screenYmin;
+    
+    getTouchScreenDetails(&screenXmin,&screenXmax,&screenYmin,&screenYmax);
+    scaleXvalue = ((float)screenXmax-screenXmin) / 320.0;
+    scaleYvalue = ((float)screenYmax-screenYmin) / 240.0;
+    #endif
+    
+    ofAddListener(ofEvents().update,this,&ofxPiTFT::update);
 }
 
 void ofxPiTFT::setScreenTransformation(SCREEN_TRANSFORMATION _trans){
@@ -112,9 +117,11 @@ void ofxPiTFT::setScreenTransformation(SCREEN_TRANSFORMATION _trans){
 }
 
 void ofxPiTFT::update(ofEventArgs & args){
-//    getTouchSample(&rawX, &rawY, &rawPressure);
-//    app->mouseX = (rawX/scaleXvalue)*ofGetWidth();
-//    app->mouseY = (rawY/scaleYvalue)*ofGetHeight();
+    #ifdef TARGET_RASPBERRY_PI
+    getTouchSample(&rawX, &rawY, &rawPressure);
+    app->mouseX = (rawX/scaleXvalue)*ofGetWidth();
+    app->mouseY = (rawY/scaleYvalue)*ofGetHeight();
+    #endif
 }
 
 void ofxPiTFT::draw(ofEventArgs & args){
