@@ -46,7 +46,7 @@ private:
     
 #ifdef TARGET_RASPBERRY_PI
     //DISPMANX_DISPLAY_HANDLE_T display;
-//    int primaryDisplay;
+    int primaryDisplay;
 //    DISPMANX_MODEINFO_T primaryDisplayInfo;
     
     //DISPMANX_RESOURCE_HANDLE_T screen_resource;

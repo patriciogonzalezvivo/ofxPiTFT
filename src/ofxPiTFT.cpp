@@ -22,7 +22,6 @@ ofxPiTFT::ofxPiTFT(){
     
     bcm_host_init();
     
-    int primaryDisplay;
     primaryDisplay = vc_dispmanx_display_open(0);
     if (!primaryDisplay) {
         ofLog(OF_LOG_ERROR, "Unable to open primary display");
