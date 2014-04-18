@@ -18,7 +18,7 @@ ofxPiTFT::ofxPiTFT(){
     //
 #ifdef TARGET_RASPBERRY_PI
     secondaryDisplayBuffer = 0;
-    screenTransformation = (VC_IMAGE_TRANSFORM_T)0;
+    screenTransformation = (DISPMANX_TRANSFORM_T)0;
     fbp = 0;
     
     // PRIMARY DISPLAY
