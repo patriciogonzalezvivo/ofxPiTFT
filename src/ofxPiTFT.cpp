@@ -22,11 +22,13 @@ ofxPiTFT::ofxPiTFT(){
     
     bcm_host_init();
     
+    int primaryDisplay;
     primaryDisplay = vc_dispmanx_display_open(0);
     if (!primaryDisplay) {
         ofLog(OF_LOG_ERROR, "Unable to open primary display");
         return;
     }
+    DISPMANX_MODEINFO_T primaryDisplayInfo;
     ret = vc_dispmanx_display_get_info(primaryDisplay, &primaryDisplayInfo);
     if (ret) {
          ofLog(OF_LOG_ERROR, "Unable to get primary display information");
