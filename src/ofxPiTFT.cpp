@@ -56,7 +56,6 @@ ofxPiTFT::ofxPiTFT(){
     
     //  SCREEN RESOURCE
     //
-//    screenResource = vc_dispmanx_resource_create(VC_IMAGE_RGB565, secondaryVInfo.xres, secondaryVInfo.yres, &image_prt);
     screenResource = vc_dispmanx_resource_create(VC_IMAGE_RGB565, secondaryVInfo.xres, secondaryVInfo.yres, &image_prt);
     if (!screenResource) {
          ofLog(OF_LOG_ERROR, "Unable to create screen buffer");
@@ -65,6 +64,8 @@ ofxPiTFT::ofxPiTFT(){
         return;
     }
     
+    //  Memory BUFFER
+    //
     fbp = (char*) mmap(0, secondaryFInfo.smem_len, PROT_READ | PROT_WRITE, MAP_SHARED, secondaryDisplayBuffer, 0);
     if (fbp <= 0) {
         ofLog(OF_LOG_ERROR, "Unable to create mamory mapping");
@@ -74,8 +75,9 @@ ofxPiTFT::ofxPiTFT(){
         return;
     }
     
-//    vc_dispmanx_rect_set(&secondaryDisplayRect, 0, 0, secondaryVInfo.xres, secondaryVInfo.yres);
-    vc_dispmanx_rect_set(&secondaryDisplayRect, 0, 0, primaryDisplayInfo.width, primaryDisplayInfo.height);
+    //  PiTFT Proportions
+    //
+    vc_dispmanx_rect_set(&secondaryDisplayRect, 0, 0, secondaryVInfo.xres, secondaryVInfo.yres);
 #endif
     
     ofAddListener(ofEvents().draw,this,&ofxPiTFT::draw);
