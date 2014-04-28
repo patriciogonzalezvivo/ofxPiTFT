@@ -2,4 +2,4 @@
 
 OpenFrameworks addon for [Adafruit PiTFT module](https://www.adafruit.com/products/1601)
 
-Under construction...
+[Under construction...](https://github.com/patriciogonzalezvivo/ofxPiTFT)
