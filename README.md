@@ -2,4 +2,11 @@
 
 OpenFrameworks addon for [Adafruit PiTFT module](https://www.adafruit.com/products/1601)
 
-[Under construction...](https://github.com/patriciogonzalezvivo/ofxPiTFT)
+# Installing
+Clone [this addon repository](https://github.com/patriciogonzalezvivo/ofxPiTFT) into your `openFrameworks/addons` folder:
+
+	cd openFrameworks/addons
+	git clone https://github.com/patriciogonzalezvivo/ofxPiTFT
+
+# Use
+[The Mirroring to the TFT display works but the touch events are under construction...](https://github.com/patriciogonzalezvivo/ofxPiTFT)
