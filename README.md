@@ -13,5 +13,5 @@ Clone [this addon repository](https://github.com/patriciogonzalezvivo/ofxPiTFT) 
 
 # Authors
 
-* [Patricio Gonzalez Vivo](@patriciogv)
-* [Christopher Baker](@bakercp)
+* [Patricio Gonzalez Vivo](http://patriciogonzalezvivo.com/)
+* [Christopher Baker](http://christopherbaker.net/)
