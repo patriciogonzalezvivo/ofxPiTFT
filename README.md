@@ -10,3 +10,8 @@ Clone [this addon repository](https://github.com/patriciogonzalezvivo/ofxPiTFT) 
 
 # Use
 [The Mirroring to the TFT display works but the touch events are under construction...](https://github.com/patriciogonzalezvivo/ofxPiTFT)
+
+# Authors
+
+* [Patricio Gonzalez Vivo](@patriciogv)
+* [Christopher Baker](@bakercp)
